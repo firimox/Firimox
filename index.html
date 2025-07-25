@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Firimox Search</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #000;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    #logo {
+      font-size: 40px;
+      font-weight: bold;
+      color: #00e5ff;
+      margin-bottom: 40px;
+    }
+
+    .search-container {
+      display: flex;
+      align-items: center;
+      background-color: #fff;
+      border-radius: 30px;
+      padding: 5px 15px;
+      width: 600px;
+      max-width: 90%;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+
+    .search-container input {
+      flex: 1;
+      padding: 12px 15px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      background: transparent;
+      text-align: right;
+      direction: rtl;
+      color: #333;
+    }
+
+    .icon {
+      margin-left: 10px;
+      font-size: 18px;
+      color: #555;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      max-width: 500px;
+      margin: 20px auto;
+      text-align: right;
+    }
+
+    li {
+      background: #1c1c1c;
+      margin: 5px 0;
+      padding: 10px 15px;
+      border-radius: 8px;
+      border: 1px solid #333;
+      color: #eee;
+    }
+
+    li a {
+      color: #00e5ff;
+      text-decoration: none;
+    }
+
+    li a:hover {
+      text-decoration: underline;
+    }
+
+    #noResult {
+      display: none;
+      color: #ff4d4d;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔵 Firimox لوگو -->
+  <div id="logo">Firimox</div>
+
+  <!-- 🔍 سرچ باکس -->
+  <div class="search-container">
+    <div class="icon">🔍</div>
+    <input type="text" id="searchBox" placeholder="Search the web or type a URL" />
+  </div>
+
+  <!-- 📋 تلاش کے نتائج -->
+  <ul id="itemList">
+    <li style="display: none;">HTML سیکھیں</li>
+    <li style="display: none;">CSS سیکھیں</li>
+    <li style="display: none;">JavaScript سیکھیں</li>
+    <li style="display: none;">Web Design</li>
+    <li style="display: none;">Graphic Design</li>
+    <li style="display: none;">WordPress</li>
+    <li style="display: none;"><a href="https://www.youtube.com/@CodeWithHarry" target="_blank">Freelancing (CodeWithHarry)</a></li>
+  </ul>
+
+  <p id="noResult">کوئی نتیجہ نہیں ملا۔</p>
+
+  <script>
+    const searchBox = document.getElementById("searchBox");
+    const listItems = document.querySelectorAll("#itemList li");
+    const noResult = document.getElementById("noResult");
+
+    searchBox.addEventListener("keyup", function () {
+      const searchValue = this.value.toLowerCase();
+      let hasResult = false;
+
+      listItems.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        const match = text.includes(searchValue);
+        item.style.display = match && searchValue ? "block" : "none";
+        if (match && searchValue) hasResult = true;
+      });
+
+      noResult.style.display = hasResult || !searchValue ? "none" : "block";
+    });
+  </script>
+</body>
+</html>
